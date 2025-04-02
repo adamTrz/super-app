@@ -3,6 +3,7 @@ import {fileURLToPath} from 'node:url';
 import * as Repack from '@callstack/repack';
 import rspack from '@rspack/core';
 import {getSharedDependencies} from 'super-app-showcase-sdk';
+import {withZephyr} from 'zephyr-repack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,18 +15,20 @@ const __dirname = path.dirname(__filename);
  * Learn about Re.Pack configuration: https://re-pack.dev/docs/guides/configuration
  */
 
-export default env => {
+const USE_ZEPHYR = Boolean(process.env.ZC);
+
+const mainConfig = env => {
   const {mode, platform = process.env.PLATFORM} = env;
 
   return {
     mode,
     context: __dirname,
     entry: './index.js',
-    experiments: {
-      incremental: mode === 'development',
-    },
+    // experiments: {
+    //   incremental: mode === 'development',
+    // },
     resolve: {
-      ...Repack.getResolveOptions(),
+      ...Repack.getResolveOptions(platform),
     },
     output: {
       uniqueName: 'sas-host',
@@ -43,9 +46,10 @@ export default env => {
         dts: false,
         remotes: {
           booking: `booking@http://localhost:9000/${platform}/mf-manifest.json`,
-          shopping: `shopping@http://localhost:9001/${platform}/mf-manifest.json`,
+          shopping: `shopping@http://localhost:9008/shopping.container.js.bundle`,
           dashboard: `dashboard@http://localhost:9002/${platform}/mf-manifest.json`,
           auth: `auth@http://localhost:9003/${platform}/mf-manifest.json`,
+          // news: `news@http://localhost:9004/${platform}/mf-manifest.json`,
         },
         shared: getSharedDependencies({eager: true}),
       }),
@@ -56,3 +60,5 @@ export default env => {
     ],
   };
 };
+
+export default USE_ZEPHYR ? withZephyr()(mainConfig) : mainConfig;

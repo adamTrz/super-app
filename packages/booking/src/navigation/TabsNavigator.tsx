@@ -32,22 +32,22 @@ const TabsNavigator = () => {
           tabBarIcon: () => homeIcon,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="CalendarNavigator"
         component={CalendarNavigator}
         options={{
           title: 'Calendar',
           tabBarIcon: () => calendarIcon,
         }}
-      />
-      <Tabs.Screen
+      /> */}
+      {/* <Tabs.Screen
         name="AccountNavigator"
         component={AccountNavigator}
         options={{
           title: 'Account',
           tabBarIcon: () => accountIcon,
         }}
-      />
+      /> */}
     </Tabs.Navigator>
   );
 };

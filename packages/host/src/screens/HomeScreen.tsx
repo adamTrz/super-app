@@ -83,7 +83,7 @@ const HomeScreen = ({navigation}: Props) => {
       contentInsetAdjustmentBehavior="automatic">
       <View style={styles.header}>
         <Text variant="titleLarge" style={styles.headerTitle}>
-          Upcoming Appointments
+          zzzzz
         </Text>
         <Button
           compact

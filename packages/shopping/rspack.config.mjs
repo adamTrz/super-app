@@ -3,6 +3,7 @@ import {fileURLToPath} from 'node:url';
 import * as Repack from '@callstack/repack';
 import rspack from '@rspack/core';
 import {getSharedDependencies} from 'super-app-showcase-sdk';
+import {withZephyr} from 'zephyr-repack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,8 +14,9 @@ const __dirname = path.dirname(__filename);
  * Learn about Rspack configuration: https://rspack.dev/config/
  * Learn about Re.Pack configuration: https://re-pack.dev/docs/guides/configuration
  */
+const USE_ZEPHYR = Boolean(process.env.ZC);
 
-export default env => {
+const mainConfig = env => {
   const {mode, platform = process.env.PLATFORM} = env;
 
   return {
@@ -46,14 +48,14 @@ export default env => {
           './App': './src/navigation/MainNavigator',
         },
         remotes: {
-          auth: `auth@http://localhost:9003/${platform}/mf-manifest.json`,
+          auth: `auth@https://t-dev-ios-test-auth-super-app-adamtrz-ze.zephyrcloud.app/mf-manifest.json`,
         },
         shared: getSharedDependencies({eager: false}),
       }),
-      new Repack.plugins.CodeSigningPlugin({
-        enabled: mode === 'production',
-        privateKeyPath: path.join('..', '..', 'code-signing.pem'),
-      }),
+      // new Repack.plugins.CodeSigningPlugin({
+      //   enabled: mode === 'production',
+      //   privateKeyPath: path.join('..', '..', 'code-signing.pem'),
+      // }),
       // silence missing @react-native-masked-view optionally required by @react-navigation/elements
       new rspack.IgnorePlugin({
         resourceRegExp: /^@react-native-masked-view/,
@@ -61,3 +63,5 @@ export default env => {
     ],
   };
 };
+
+export default USE_ZEPHYR ? withZephyr()(mainConfig) : mainConfig;

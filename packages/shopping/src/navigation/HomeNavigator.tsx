@@ -17,7 +17,7 @@ const HomeNavigator = () => {
         header: NavBar,
         title: 'Shopping',
       }}>
-      <Home.Screen name="Home" component={HomeScreen} />
+      <Home.Screen name="Home" component={() => null} />
     </Home.Navigator>
   );
 };
