@@ -50,10 +50,10 @@ export default env => {
         },
         shared: getSharedDependencies({eager: false}),
       }),
-      new Repack.plugins.CodeSigningPlugin({
-        enabled: mode === 'production',
-        privateKeyPath: path.join('..', '..', 'code-signing.pem'),
-      }),
+      // new Repack.plugins.CodeSigningPlugin({
+      //   enabled: mode === 'production',
+      //   privateKeyPath: path.join('..', '..', 'code-signing.pem'),
+      // }),
       // silence missing @react-native-masked-view optionally required by @react-navigation/elements
       new rspack.IgnorePlugin({
         resourceRegExp: /^@react-native-masked-view/,
