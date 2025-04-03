@@ -161,3 +161,7 @@ Super App showcase is an open source project and will always remain free to use.
 [callstack-badge]: https://callstack.com/images/callstack-badge.svg
 [callstack]: https://callstack.com/open-source/?utm_source=github.com&utm_medium=referral&utm_campaign=super-app-showcase&utm_term=readme-badge
 [callstack-readme-with-love]: https://callstack.com/?utm_source=github.com&utm_medium=referral&utm_campaign=super-app-showcase&utm_term=readme-with-love
+
+## Deployment
+
+For instructions on how to deploy mini apps and the host app to Zephyr Cloud, see the [Deployment Guide](/DEPLOYMENT.md).
