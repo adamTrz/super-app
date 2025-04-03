@@ -1,7 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabsNavigator from './TabsNavigator';
-import HomeScreen from '../screens/HomeScreen';
 
 export type MainStackParamList = {
   Tabs: undefined;
@@ -10,7 +9,14 @@ export type MainStackParamList = {
 const Main = createNativeStackNavigator<MainStackParamList>();
 
 const MainNavigator = () => {
-  return <HomeScreen />;
+  return (
+    <Main.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Main.Screen name="Tabs" component={TabsNavigator} />
+    </Main.Navigator>
+  );
 };
 
 export default MainNavigator;
