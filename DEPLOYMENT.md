@@ -91,15 +91,7 @@ new Repack.plugins.ModuleFederationPluginV2({
 });
 ```
 
-## Running the Application
-
-### Development Mode
-
-1. To test if mini apps have been corectly deployed start the host app in dev mode:
-
-```bash
-pnpm --filter host start
-```
+## Running the Application locally with Mini Apps hosted remotely
 
 > **Warning:** Due to a React bug ([facebook/react#32030](https://github.com/facebook/react/issues/32030)), mixing development and production React runtimes can cause issues. When testing changes locally, make sure to bundle mini applications with `--dev true` flag:
 >
@@ -113,7 +105,13 @@ pnpm --filter host start
 >
 > This issue is being addressed in [facebook/react#32341](https://github.com/facebook/react/pull/32341) and should be fixed in a future React release.
 
-Then bundle mini apps normally and deploy to Zephyr as described above.
+1. Apply above changes to `package.json` file at root level
+2. Bundle mini apps with `ZC=1 pnpm bundle:<platform>` command
+3. Test if mini apps have been corectly deployed - start the Host App in dev mode:
+
+```bash
+pnpm --filter host start
+```
 
 ---
 

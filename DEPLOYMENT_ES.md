@@ -91,15 +91,7 @@ new Repack.plugins.ModuleFederationPluginV2({
 });
 ```
 
-## Ejecutar la Aplicación
-
-### Modo Desarrollo
-
-1. Para probar si las mini aplicaciones se han desplegado correctamente, inicia la aplicación host en modo desarrollo:
-
-```bash
-pnpm --filter host start
-```
+## Ejecutar la Aplicación localmente con Mini Aplicaciones alojadas remotamente
 
 > **Advertencia:** Debido a un error en React ([facebook/react#32030](https://github.com/facebook/react/issues/32030)), mezclar entornos de desarrollo y producción de React puede causar problemas. Al probar cambios localmente, asegúrate de empaquetar las mini aplicaciones con la bandera `--dev true`:
 >
@@ -113,7 +105,9 @@ pnpm --filter host start
 >
 > Este problema está siendo abordado en [facebook/react#32341](https://github.com/facebook/react/pull/32341) y debería ser corregido en una futura versión de React.
 
-Luego empaqueta las mini aplicaciones normalmente y despliégalas en Zephyr como se describe arriba.
+1. Aplica los cambios anteriores al archivo `package.json` a nivel raíz
+2. Empaqueta las mini aplicaciones con el comando `ZC=1 pnpm bundle:<platform>`
+3. Prueba si las mini aplicaciones se han desplegado correctamente - inicia la Aplicación Host en modo desarrollo:
 
 ---
 
